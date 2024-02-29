@@ -1,4 +1,64 @@
-<h1>Hello Angular ( {{ title }} )</h1>
+<!-- angular pipe -->
+<h1 (click)="isParagraphVisible = !isParagraphVisible; show()">
+  Hello Angular ( {{ title }} )
+  <br />
+  <!-- Hello Angular ( {{ title | uppercase }} ) всі літери великі -->
+  <br />
+  <!-- Hello Angular ( {{ title | titlecase }} ) - перші літери великі, кожне слово -->
+  <br />
+  <!-- Hello Angular ( {{ title | lowercase }} ) - всі літери маленьки -->
+  <br />
+  <!-- Hello Angular ( {{ title | lowercase }} )
+  {{ getDate() | date : "dd MMMM YYYY" }} {{ 20.82 | percent }} - дата, проценти та іншу -->
+  <br />
+  Hello Angular ( {{ title }} ) Price - {{ 20.33 | currency }} - знак
+  ціни(доллара)
+</h1>
 
-<app-new></app-new>
-<app-new2></app-new2>
+<!-- angular derective -->
+
+<p *ngIf="isParagraphVisible">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, omnis
+  sapiente iusto distinctio numquam vel perferendis. Praesentium fugit
+  consectetur voluptates voluptatum corrupti provident eius dolorum repellendus
+  ipsam omnis possimus facere, ducimus corporis explicabo maxime, ut neque
+  dolore nesciunt amet nam quisquam rem? Ad eos sit cupiditate dolorum odio,
+  eaque illum?
+</p>
+
+<ul *ngIf="isParagraphVisible">
+  <li *ngFor="let item of list; index as id">
+    {{ item + " with id - " + id }}
+  </li>
+</ul>
+
+<ng-container *ngFor="let user of roles; index as idx">
+  <div [ngSwitch]="user.role">
+    <div *ngSwitchCase="'admin'">
+      {{ idx + 1 }}. Вітаю, ви зайшли як Адмін ({{ user.text }})
+    </div>
+    <div *ngSwitchCase="'user'">
+      {{ idx + 1 }}. Вітаю, ви зайшли як Юзер ({{ user.text }})
+    </div>
+    <div *ngSwitchCase="'customer'">
+      {{ idx + 1 }}. Вітаю, ви зайшли як Клієнт ({{ user.text }})
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngFor="let user of roles; index as idx">
+  <!-- <div
+    [ngStyle]="{
+      color:
+        user.role === 'admin' ? 'green' : user.role === 'user' ? 'blue' : 'red'
+    }"
+  >
+    {{ idx + 1 }}. Вітаю ({{ user.text }})
+  </div> -->
+  <div
+    [ngStyle]="{ color: getColor(user) }"
+    [ngClass]="{ admin: user.role === 'admin' }"
+  >
+    {{ idx + 1 }}. Вітаю ({{ user.text }})
+  </div>
+</ng-container>
