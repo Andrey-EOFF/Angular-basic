@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ShowTitleComponent } from "./components/show-title/show-title.component";
 
 export interface Role {
   role: string,
@@ -12,10 +13,18 @@ export interface Role {
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [RouterModule, CommonModule]
+    imports: [RouterModule, CommonModule, ShowTitleComponent]
 })
 export class AppComponent {
   title: string = 'Angular-basic';
+
+  changeTitle(newTitle:string) {
+
+
+    this.title = newTitle;
+
+  }
+
   isParagraphVisible: boolean = true;
   list: string[] = [
     'list one',
